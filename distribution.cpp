@@ -32,29 +32,25 @@ std::discrete_distribution<int> get_discrete_distribution() {
 
 template <class T>
 long benchmark(T dist, std::mt19937 mt_rand) {
-	//CUtilTimer timer;
-	//timer.start();
+	CUtilTimer timer;
+	timer.start();
 	std::clock_t start;
-	start = std::clock();
 	for(int i=0;i<TRIALS;i++) {
 		for(int j=0;j<SAMPLE_SIZE;j++) dist(mt_rand);
 	}
-	return (std::clock()-start)/TRIALS;
-	//timer.stop();
-	//return timer.get_ticks()/TRIALS;
+	timer.stop();
+	return timer.get_ticks()/TRIALS;
 }
 
 long benchmarkmt19937(std::mt19937 mt_rand) {
-	//CUtilTimer timer;
+	CUtilTimer timer;
 	std::clock_t start;
-	//timer.start();
-	start = std::clock();
+	timer.start();
 	for(int i=0;i<TRIALS;i++) {
 		for(int j=0;j<SAMPLE_SIZE;j++) mt_rand();
 	}
-	return (std::clock()-start)/TRIALS;
-	//timer.stop();
-	//return timer.get_ticks()/TRIALS;
+	timer.stop();
+	return timer.get_ticks()/TRIALS;
 }
 
 int main() {
